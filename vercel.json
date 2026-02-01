@@ -1,9 +1,4 @@
 {
   "buildCommand": "curl -L https://github.com/gohugoio/hugo/releases/download/v0.155.1/hugo_extended_0.155.1_Linux-64bit.tar.gz | tar xz && ./hugo --minify",
-  "outputDirectory": "public",
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node@3"
-    }
-  }
+  "outputDirectory": "public"
 }
