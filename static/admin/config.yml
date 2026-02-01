@@ -2,6 +2,8 @@ backend:
   name: github
   repo: Coda1977/the-ai-shift
   branch: master
+  base_url: https://the-ai-shift.vercel.app
+  auth_endpoint: /api/auth
 
 media_folder: "static/images"
 public_folder: "/images"
