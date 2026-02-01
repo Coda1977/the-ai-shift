@@ -1,44 +1,44 @@
-export default async function handler(req, res) {
-  const code = req.query.code;
+module.exports = async function handler(req, res) {
+  var code = req.query.code;
 
   if (!code) {
     return res.status(400).send('Missing code parameter');
   }
 
-  const response = await fetch('https://github.com/login/oauth/access_token', {
+  var response = await fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({
       client_id: process.env.OAUTH_GITHUB_CLIENT_ID,
       client_secret: process.env.OAUTH_GITHUB_CLIENT_SECRET,
-      code,
+      code: code,
     }),
   });
 
-  const data = await response.json();
-  const token = data.access_token;
+  var data = await response.json();
+  var token = data.access_token;
 
   if (!token) {
-    return res.status(401).send('Failed to get access token from GitHub');
+    return res.status(401).send('Failed to get access token from GitHub: ' + JSON.stringify(data));
   }
 
-  const content = `<!DOCTYPE html><html><body><script>
-    (function() {
-      function recieveMessage(e) {
-        console.log("recieveMessage", e);
-        window.opener.postMessage(
-          'authorization:github:success:{"token":"${token}","provider":"github"}',
-          e.origin
-        );
-        window.removeEventListener("message", recieveMessage, false);
-      }
-      window.addEventListener("message", recieveMessage, false);
-      window.opener.postMessage("authorizing:github", "*");
-    })();
-  </script></body></html>`;
+  var content = '<!DOCTYPE html><html><body><script>' +
+    '(function() {' +
+    '  function recieveMessage(e) {' +
+    '    console.log("recieveMessage", e);' +
+    '    window.opener.postMessage(' +
+    '      "authorization:github:success:" + JSON.stringify({token: "' + token + '", provider: "github"}),' +
+    '      e.origin' +
+    '    );' +
+    '    window.removeEventListener("message", recieveMessage, false);' +
+    '  }' +
+    '  window.addEventListener("message", recieveMessage, false);' +
+    '  window.opener.postMessage("authorizing:github", "*");' +
+    '})();' +
+    '</script></body></html>';
 
   res.status(200).send(content);
-}
+};
