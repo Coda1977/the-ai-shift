@@ -1,0 +1,48 @@
+{{ define "main" }}
+<div class="site-wrapper">
+  <div class="home-hero">
+    <h1>{{ .Title }}</h1>
+    <div class="subtitle">{{ .Params.subtitle | default "8 Rules for Leading the Change That's Already Here" }}</div>
+  </div>
+  <div class="page-layout">
+    {{- partial "toc.html" . -}}
+    <div class="content home-content">
+      {{ .Content }}
+
+      <h2>The 8 Rules</h2>
+      <div class="section-grid">
+        {{ range where site.RegularPages "Params.rule_number" "!=" nil }}
+        <a href="{{ .RelPermalink }}" class="section-card">
+          <div class="card-part">{{ .Params.part }}</div>
+          <h3>Rule {{ .Params.rule_number }}: {{ .Params.short_title | default .Title }}</h3>
+          <p>{{ .Params.subtitle }}</p>
+        </a>
+        {{ end }}
+      </div>
+
+      {{ $exec := site.GetPage "/executive" }}
+      {{ with $exec }}
+      <h2>For the Executive Team</h2>
+      <div class="section-grid">
+        <a href="{{ .RelPermalink }}" class="section-card">
+          <div class="card-part">EXECUTIVE</div>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Params.subtitle }}</p>
+        </a>
+      </div>
+      {{ end }}
+
+      <h2>Appendices</h2>
+      <div class="section-grid">
+        {{ range (site.GetPage "/appendices").Pages }}
+        <a href="{{ .RelPermalink }}" class="section-card">
+          <div class="card-part">APPENDIX</div>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Params.subtitle }}</p>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

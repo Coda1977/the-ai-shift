@@ -1,3 +1,38 @@
-baseURL: https://example.org/
-languageCode: en-us
-title: My New Hugo Site
+baseURL: "https://the-ai-shift.vercel.app/"
+languageCode: "en-us"
+title: "The AI Shift"
+theme: "editorial"
+
+params:
+  description: "8 Rules for Leading the Change That's Already Here. A change management booklet for the AI era."
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      table: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+
+menus:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "Rules"
+      url: "/part-1-why/"
+      weight: 10
+    - name: "Executive"
+      url: "/executive/"
+      weight: 40
+    - name: "Appendices"
+      url: "/appendices/"
+      weight: 50
+
+disableKinds:
+  - taxonomy
+  - term
+
+enableRobotsTXT: true

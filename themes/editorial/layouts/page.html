@@ -1,0 +1,55 @@
+{{ define "main" }}
+<div class="site-wrapper">
+  <div class="page-layout">
+    {{- partial "toc.html" . -}}
+    <article class="content">
+      <div class="page-meta">
+        {{ with .Params.part }}
+          <div class="page-part-label">{{ . }}</div>
+        {{ end }}
+        {{ with .Params.rule_number }}
+          <div class="rule-number">{{ . }}</div>
+        {{ end }}
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.subtitle }}
+          <div class="page-subtitle">{{ . }}</div>
+        {{ end }}
+      </div>
+
+      {{ .Content }}
+
+      {{- /* Page navigation */ -}}
+      {{ $pages := site.RegularPages }}
+      {{ $allPages := slice }}
+      {{- /* Build ordered list from all regular pages by weight */ -}}
+      {{ range sort site.RegularPages "Weight" }}
+        {{ $allPages = $allPages | append . }}
+      {{ end }}
+      {{ $currentIndex := -1 }}
+      {{ range $i, $p := $allPages }}
+        {{ if eq $p.RelPermalink $.RelPermalink }}
+          {{ $currentIndex = $i }}
+        {{ end }}
+      {{ end }}
+      {{ if ge $currentIndex 0 }}
+      <nav class="page-nav">
+        {{ if gt $currentIndex 0 }}
+          {{ $prev := index $allPages (sub $currentIndex 1) }}
+          <a href="{{ $prev.RelPermalink }}" class="nav-prev">
+            <div class="nav-label">&larr; Previous</div>
+            <div class="nav-title">{{ $prev.Title }}</div>
+          </a>
+        {{ end }}
+        {{ if lt $currentIndex (sub (len $allPages) 1) }}
+          {{ $next := index $allPages (add $currentIndex 1) }}
+          <a href="{{ $next.RelPermalink }}" class="nav-next">
+            <div class="nav-label">Next &rarr;</div>
+            <div class="nav-title">{{ $next.Title }}</div>
+          </a>
+        {{ end }}
+      </nav>
+      {{ end }}
+    </article>
+  </div>
+</div>
+{{ end }}

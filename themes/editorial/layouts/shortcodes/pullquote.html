@@ -1,0 +1,6 @@
+<div class="pullquote">
+  <p>{{ .Inner | markdownify }}</p>
+  {{ with .Get "source" }}
+    <div class="pullquote-source">&mdash; {{ . }}</div>
+  {{ end }}
+</div>

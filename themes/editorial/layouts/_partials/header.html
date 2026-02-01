@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="site-wrapper">
+    <div style="display:flex;align-items:baseline;gap:0.5rem;">
+      <a href="{{ "/" | relURL }}" class="site-title">The AI Shift</a>
+      <span class="site-subtitle">8 Rules for Leading the Change</span>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav class="header-nav">
+      {{ range site.Menus.main }}
+        <a href="{{ .URL | relURL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </div>
+</header>

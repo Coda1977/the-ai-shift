@@ -1,0 +1,86 @@
+backend:
+  name: github
+  repo: Coda1977/the-ai-shift
+  branch: master
+
+media_folder: "static/images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "content/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+      - name: "how-to-use"
+        label: "How to Use This Booklet"
+        file: "content/how-to-use.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "Weight", name: "weight", widget: "number" }
+          - { label: "Body", name: "body", widget: "markdown" }
+      - name: "executive"
+        label: "Executive Section"
+        file: "content/executive.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "Weight", name: "weight", widget: "number" }
+          - { label: "Part", name: "part", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "part-1-why"
+    label: "Part 1: Why — Feel"
+    folder: "content/part-1-why"
+    create: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Weight", name: "weight", widget: "number" }
+      - { label: "Part", name: "part", widget: "string" }
+      - { label: "Rule Number", name: "rule_number", widget: "number", required: false }
+      - { label: "Short Title", name: "short_title", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "part-2-who"
+    label: "Part 2: Who — People"
+    folder: "content/part-2-who"
+    create: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Weight", name: "weight", widget: "number" }
+      - { label: "Part", name: "part", widget: "string" }
+      - { label: "Rule Number", name: "rule_number", widget: "number", required: false }
+      - { label: "Short Title", name: "short_title", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "part-3-how"
+    label: "Part 3: How — System"
+    folder: "content/part-3-how"
+    create: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Weight", name: "weight", widget: "number" }
+      - { label: "Part", name: "part", widget: "string" }
+      - { label: "Rule Number", name: "rule_number", widget: "number", required: false }
+      - { label: "Short Title", name: "short_title", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "appendices"
+    label: "Appendices"
+    folder: "content/appendices"
+    create: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "Weight", name: "weight", widget: "number" }
+      - { label: "Body", name: "body", widget: "markdown" }

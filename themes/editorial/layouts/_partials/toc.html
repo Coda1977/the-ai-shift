@@ -1,0 +1,42 @@
+<aside class="sidebar">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-nav">
+    {{ $sections := slice
+      (dict "label" "" "pages" (slice
+        (dict "title" "Introduction" "url" "/")
+        (dict "title" "How to Use This Booklet" "url" "/how-to-use/")
+      ))
+      (dict "label" "Part 1: Why — Feel" "pages" (slice
+        (dict "title" "Rule 1: Find the Emotion" "url" "/part-1-why/rule-1-find-the-emotion/")
+        (dict "title" "Rule 2: Make It Default" "url" "/part-1-why/rule-2-make-it-default/")
+        (dict "title" "Rule 3: Kill the Pilot" "url" "/part-1-why/rule-3-kill-the-pilot/")
+      ))
+      (dict "label" "Part 2: Who — People" "pages" (slice
+        (dict "title" "Rule 4: Crown the Beginners" "url" "/part-2-who/rule-4-crown-the-beginners/")
+        (dict "title" "Rule 5: Lead from the Inference Log" "url" "/part-2-who/rule-5-lead-from-inference-log/")
+        (dict "title" "Rule 6: Map the Losses" "url" "/part-2-who/rule-6-map-the-losses/")
+      ))
+      (dict "label" "Part 3: How — System" "pages" (slice
+        (dict "title" "Rule 7: Green Light List" "url" "/part-3-how/rule-7-green-light-list/")
+        (dict "title" "Rule 8: Never Refreeze" "url" "/part-3-how/rule-8-never-refreeze/")
+      ))
+      (dict "label" "Executive" "pages" (slice
+        (dict "title" "Measure the Shadow" "url" "/executive/")
+      ))
+      (dict "label" "Appendices" "pages" (slice
+        (dict "title" "A: Adoption Scorecard" "url" "/appendices/scorecard/")
+        (dict "title" "B: 90-Day Sprint" "url" "/appendices/sprint/")
+        (dict "title" "C: Framework Reference" "url" "/appendices/frameworks/")
+        (dict "title" "D: Case Studies" "url" "/appendices/case-studies/")
+      ))
+    }}
+    {{ range $sections }}
+      {{ with .label }}
+        <li><div class="toc-part-label">{{ . }}</div></li>
+      {{ end }}
+      {{ range .pages }}
+        <li><a href="{{ .url | relURL }}"{{ if eq $.RelPermalink .url }} class="active"{{ end }}>{{ .title }}</a></li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</aside>

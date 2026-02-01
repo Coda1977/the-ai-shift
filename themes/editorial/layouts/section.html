@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="site-wrapper">
+  <div class="page-layout">
+    {{- partial "toc.html" . -}}
+    <div class="content">
+      <div class="page-meta">
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.subtitle }}
+          <div class="page-subtitle">{{ . }}</div>
+        {{ end }}
+      </div>
+
+      {{ .Content }}
+
+      <div class="section-grid">
+        {{ range .Pages.ByWeight }}
+        <a href="{{ .RelPermalink }}" class="section-card">
+          {{ with .Params.part }}
+            <div class="card-part">{{ . }}</div>
+          {{ end }}
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Params.subtitle }}</p>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
